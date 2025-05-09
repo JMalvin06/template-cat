@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "oreomod:block/cat_bed", "y":  180},
+    "facing=east":  { "model": "oreomod:block/cat_bed", "y": 270},
+    "facing=south": { "model": "oreomod:block/cat_bed"},
+    "facing=west":  { "model": "oreomod:block/cat_bed", "y": 90}
+  }
+}
