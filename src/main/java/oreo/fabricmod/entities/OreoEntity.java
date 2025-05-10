@@ -26,22 +26,11 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.*;
 
 
-public class OreoEntity extends CatEntity implements GeoEntity {
-
-    protected static final RawAnimation WALK_ANIM =  RawAnimation.begin().thenLoop("animation.model.walk");
-    protected static final RawAnimation SIT_ANIM =  RawAnimation.begin().thenLoop("animation.model.sit");
-    protected static final RawAnimation LAY_ANIM =  RawAnimation.begin().thenLoop("animation.model.lay");
-
+public class OreoEntity extends CatEntity {
     private static final Ingredient OREO_TAMING_INGREDIENT = Ingredient.ofItems(Items.CHICKEN);
     private boolean isCarryingChicken;
     private Item heldItem;
@@ -51,7 +40,6 @@ public class OreoEntity extends CatEntity implements GeoEntity {
     public enum OreoMode {FOLLOW, ROAM} // For behavior states
     private OreoMode currentMode;
 
-    private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     private BlockPos homePos;
 
     ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>(){
@@ -99,10 +87,6 @@ public class OreoEntity extends CatEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
     }
 
-    @Override
-    public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "Walking", 5, this::oreoAnimationController));
-    }
 
     @Override
     public void tick() {
@@ -154,16 +138,6 @@ public class OreoEntity extends CatEntity implements GeoEntity {
             OreoMod.LOGGER.info("No held item");*/
     }
 
-    protected <E extends OreoEntity> PlayState oreoAnimationController(final AnimationState<E> event) {
-        if(this.isInSleepingPose())
-            return event.setAndContinue(LAY_ANIM);
-        else if (this.isInSittingPose())
-            return event.setAndContinue(SIT_ANIM);
-        else if (event.isMoving())
-            return event.setAndContinue(WALK_ANIM);
-
-        return PlayState.STOP;
-    }
 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
@@ -286,11 +260,7 @@ public class OreoEntity extends CatEntity implements GeoEntity {
         }
         return super.interactMob(player, hand);
     }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.geoCache;
-    }
+    
 
     public BlockPos getHomePos(){
         return homePos;
@@ -320,8 +290,4 @@ public class OreoEntity extends CatEntity implements GeoEntity {
     public OreoMode getCurrentMode(){
         return currentMode;
     }
-
-
-
-
 }

@@ -7,7 +7,6 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import oreo.fabricmod.client.ModRenderers;
 import oreo.fabricmod.entities.ModEntities;
-import software.bernie.geckolib.GeckoLib;
 
 @Environment(EnvType.CLIENT)
 public class OreoModClient implements ClientModInitializer {
@@ -23,7 +22,6 @@ public class OreoModClient implements ClientModInitializer {
 		 * Entity Renderers can also manipulate the model before it renders based on entity context (EndermanEntityRenderer#render).
 		 */
 
-		GeckoLib.initialize();
 
 		ModRenderers.registerRenderer();
 	}
