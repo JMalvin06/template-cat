@@ -21,6 +21,7 @@ import java.util.List;
 public class OreoEntityRenderer extends MobEntityRenderer<OreoEntity, OreoEntityModel<OreoEntity>> {
     public OreoEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new OreoEntityModel(context.getPart(EntityModelLayers.CAT)), 0.4f);
+        this.addFeature(new CreateHatPosFix<>(this));
     }
 
     @Override

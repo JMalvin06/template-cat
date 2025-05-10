@@ -14,7 +14,7 @@ public class ModEntities {
     public static final EntityType<OreoEntity> OREO_ENTITY = Registry.register(
             Registries.ENTITY_TYPE,
             new Identifier(OreoMod.MOD_ID, "oreo_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, OreoEntity::new).dimensions(EntityDimensions.fixed(.6f, .7f)).build()
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, OreoEntity::new).dimensions(EntityDimensions.fixed(0.6f, 0.7f)).build()
     );
 
     public static void registerEntities(){

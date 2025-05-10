@@ -1,7 +1,6 @@
 package oreo.fabricmod.entities;
 
 
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.util.math.Vec3i;
 import oreo.fabricmod.OreoMod;
 import oreo.fabricmod.ai.OreoBackHomeGoal;
@@ -44,7 +43,7 @@ public class OreoEntity extends CatEntity {
 
     ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>(){
         {
-            add(new StatusEffectInstance(StatusEffects.STRENGTH, 10, 0, false, false, true));
+            add(new StatusEffectInstance(StatusEffects.STRENGTH, 1000, 0, false, false, true));
         }
     };
 
@@ -260,7 +259,7 @@ public class OreoEntity extends CatEntity {
         }
         return super.interactMob(player, hand);
     }
-    
+
 
     public BlockPos getHomePos(){
         return homePos;
