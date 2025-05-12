@@ -61,7 +61,7 @@ public class OreoItem extends Item {
                 OreoEntity oreo = new OreoEntity(ModEntities.OREO_ENTITY, context.getWorld());
                 oreo.setCustomName(Text.literal("Oreo"));
                 oreo.setOwner(context.getPlayer());
-                if(oreo.getCurrentMode() == null)
+                if(oreo.getCurrentBehavior() == null)
                     oreo.setFollowMode();
                 oreo.setPos(context.getBlockPos().getX(), context.getBlockPos().getY() + 1.1, context.getBlockPos().getZ());
                 if(context.getWorld().spawnEntity(oreo)) {
