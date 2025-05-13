@@ -5,20 +5,34 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
 import net.minecraft.world.World;
+import oreo.fabricmod.entities.EnhancedCat;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StateSaverAndLoader extends PersistentState {
 
-    public boolean isOreoInWorld = false;
+
+    public ArrayList<String> catList = new ArrayList<>();
+
+    public void addCat(String catName){
+        catList.add(catName);
+    }
 
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
-        nbt.putBoolean("isOreoInworld", isOreoInWorld);
+        for(String name : catList){
+            nbt.putString(name, "");
+        }
         return nbt;
     }
 
     public static StateSaverAndLoader createFromNbt(NbtCompound tag) {
         StateSaverAndLoader state = new StateSaverAndLoader();
-        state.isOreoInWorld = tag.getBoolean("isOreoInWorld");
+        Set<String> keys = tag.getKeys();
+        state.catList.addAll(keys);
         return state;
     }
 

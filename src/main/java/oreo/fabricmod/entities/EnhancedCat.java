@@ -202,7 +202,7 @@ public abstract class EnhancedCat extends CatEntity {
                     CatBed newHome = (CatBed)world.getBlockState(pos).getBlock();
                     newHome.setUser(this);
                     if(this.hasOwner())
-                        this.getOwner().sendMessage(Text.literal(this.getName() + " home set to " + homePos.toShortString()));
+                        this.getOwner().sendMessage(Text.literal(this.getName().getString() + " home set to " + homePos.toShortString()));
                     homePos = pos;
                 }
             }
@@ -215,7 +215,7 @@ public abstract class EnhancedCat extends CatEntity {
             if(removeGoals(new Class[]{FollowOwnerGoal.class})){
                 this.goalSelector.add(6, new WanderAroundGoal(this, .8));
                 if(this.hasOwner())
-                    this.getOwner().sendMessage(Text.literal(this.getName() + " will now roam."));
+                    this.getOwner().sendMessage(Text.literal(this.getName().getString() + " will now roam."));
                 currentState = BehaviorState.ROAM;
             }
         }
@@ -226,7 +226,7 @@ public abstract class EnhancedCat extends CatEntity {
             if (removeGoals(new Class[]{WanderAroundGoal.class})) {
                 this.goalSelector.add(4, new FollowOwnerGoal(this, 1.0, 10.0F, 5.0F, false));
                 if(this.hasOwner())
-                    this.getOwner().sendMessage(Text.literal(this.getName() + " will now follow " + this.getOwner().getEntityName() + "."));
+                    this.getOwner().sendMessage(Text.literal(this.getName().getString() + " will now follow " + this.getOwner().getEntityName() + "."));
                 currentState = BehaviorState.FOLLOW;
             }
         }
@@ -247,4 +247,6 @@ public abstract class EnhancedCat extends CatEntity {
     public BehaviorState getCurrentBehavior(){
         return currentState;
     }
+
+    public abstract void revive();
 }

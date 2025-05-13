@@ -19,6 +19,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class OreoItem extends Item {
 
@@ -57,7 +60,9 @@ public class OreoItem extends Item {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if(!context.getWorld().isClient){
-            if(!StateSaverAndLoader.getServerState(context.getWorld().getServer()).isOreoInWorld) {
+            StateSaverAndLoader state = StateSaverAndLoader.getServerState(context.getWorld().getServer());
+            ArrayList<String> catsInWorld = state.catList;
+            if(!catsInWorld.contains("Oreo")) {
                 OreoEntity oreo = new OreoEntity(ModEntities.OREO_ENTITY, context.getWorld());
                 oreo.setCustomName(Text.literal("Oreo"));
                 oreo.setOwner(context.getPlayer());

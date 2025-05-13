@@ -1,6 +1,7 @@
 package oreo.fabricmod.entities;
 
 
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import oreo.fabricmod.OreoMod;
 import oreo.fabricmod.ai.BackHomeGoal;
@@ -25,6 +26,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
+import oreo.fabricmod.items.ModItems;
 
 import java.util.*;
 
@@ -45,10 +47,37 @@ public class OreoEntity extends EnhancedCat {
         this.goalSelector.add(2, new BackHomeGoal(this, 1.1f));
     }
 
-
     @Override
-    public void tick() {
-        super.tick();
+    public void revive() {
+        if(this.dead) {
+            try {
+                OreoEntity newOreo = new OreoEntity(ModEntities.OREO_ENTITY, this.getWorld());
+                if (this.getWorld().getBlockState(this.getHomePos()).isOf(ModBlocks.CAT_BED)) {
+                    CatBed currentBed = (CatBed) this.getWorld().getBlockState(this.getHomePos()).getBlock();
+                    currentBed.setUser(newOreo);
+                }
+                newOreo.setCustomName(Text.literal("Oreo"));
+                if (this.getOwner() != null) {
+                    newOreo.setOwner((PlayerEntity) this.getOwner());
+                }
+                Vec3d spawn = this.getHomePos().toCenterPos();
+                newOreo.setPos(spawn.x, spawn.y + 1.1, spawn.z);
+                newOreo.setHomePos(this.getHomePos());
+                if (this.getWorld().spawnEntity(newOreo)) {
+                    OreoMod.LOGGER.info("Welcome back Oreo!");
+                }
+            } catch (Exception e) {
+                for (PlayerEntity player : this.getWorld().getPlayers()) {
+                    player.sendMessage(Text.literal("Oreo was unfortunately not respawned.."));
+                }
+                OreoMod.LOGGER.info(e.toString());
+                PlayerEntity owner = ((PlayerEntity) this.getOwner());
+                if (owner != null) {
+                    owner.giveItemStack(ModItems.OREO.getDefaultStack());
+                } else
+                    OreoMod.LOGGER.info("No Oreo owner to give item stack to");
+            }
+        }
     }
 
     /*private void lootChicken(){
