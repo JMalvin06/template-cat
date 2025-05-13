@@ -247,6 +247,4 @@ public abstract class EnhancedCat extends CatEntity {
     public BehaviorState getCurrentBehavior(){
         return currentState;
     }
-
-    public abstract void revive();
 }

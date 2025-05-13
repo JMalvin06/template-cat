@@ -38,7 +38,33 @@ public class ModEvents {
                 serverState.catList.remove("Oreo");
 
                 if(enhancedCat.isDead()){
-                    enhancedCat.revive();
+                    try {
+                        EnhancedCat newCat = (EnhancedCat) entity.getType().create(world);
+                        if (enhancedCat.getWorld().getBlockState(enhancedCat.getHomePos()).isOf(ModBlocks.CAT_BED)) {
+                            CatBed currentBed = (CatBed) enhancedCat.getWorld().getBlockState(enhancedCat.getHomePos()).getBlock();
+                            currentBed.setUser(newCat);
+                        }
+                        newCat.setCustomName(Text.literal(enhancedCat.getName().getString()));
+                        if (enhancedCat.getOwner() != null) {
+                            newCat.setOwner((PlayerEntity) enhancedCat.getOwner());
+                        }
+                        Vec3d spawn = enhancedCat.getHomePos().toCenterPos();
+                        newCat.setPos(spawn.x, spawn.y + 1.1, spawn.z);
+                        newCat.setHomePos(enhancedCat.getHomePos());
+                        if (enhancedCat.getWorld().spawnEntity(newCat)) {
+                            OreoMod.LOGGER.info("Welcome back " + newCat.getName().getString() + "!");
+                        }
+                    } catch (Exception e) {
+                        for (PlayerEntity player : enhancedCat.getWorld().getPlayers()) {
+                            player.sendMessage(Text.literal("Oreo was unfortunately not respawned.."));
+                        }
+                        OreoMod.LOGGER.info(e.toString());
+                        PlayerEntity owner = ((PlayerEntity) enhancedCat.getOwner());
+                        if (owner != null) {
+                            owner.giveItemStack(ModItems.OREO.getDefaultStack());
+                        } else
+                            OreoMod.LOGGER.info("No Oreo owner to give item stack to");
+                    }
                 }
             }
         });

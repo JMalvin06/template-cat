@@ -1,5 +1,6 @@
 package oreo.fabricmod.items;
 
+import net.minecraft.entity.EntityType;
 import oreo.fabricmod.OreoMod;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -8,9 +9,11 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import oreo.fabricmod.entities.EnhancedCat;
+import oreo.fabricmod.entities.ModEntities;
 
 public class ModItems {
-    public static final Item OREO = new OreoItem(new FabricItemSettings().maxCount(1));
+    public static final Item OREO = new CatItem(new FabricItemSettings().maxCount(1), ModEntities.OREO_ENTITY, "Oreo");
 
     public static void registerItems(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
