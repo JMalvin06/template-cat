@@ -35,7 +35,7 @@ public class CatItem extends Item {
                 ArrayList<String> catsInWorld = state.catList;
                 if (!catsInWorld.contains(catName)) {
                     EnhancedCat cat = (EnhancedCat) type.create(serverWorld);
-                    cat.setCustomName(Text.literal("Oreo"));
+                    cat.setCustomName(Text.literal(catName));
                     cat.setOwner(context.getPlayer());
                     if (cat.getCurrentBehavior() == null)
                         cat.setFollowMode();

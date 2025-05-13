@@ -14,13 +14,15 @@ import oreo.fabricmod.entities.ModEntities;
 
 public class ModItems {
     public static final Item OREO = new CatItem(new FabricItemSettings().maxCount(1), ModEntities.OREO_ENTITY, "Oreo");
+    public static final Item KIKI = new CatItem(new FabricItemSettings().maxCount(1), ModEntities.KIKI_ENTITY, "Kiki");
 
     public static void registerItems(){
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(OREO);
+            content.add(KIKI);
         });
         Registry.register(Registries.ITEM, new Identifier(OreoMod.MOD_ID, "oreo_item"), OREO);
-
+        Registry.register(Registries.ITEM, new Identifier(OreoMod.MOD_ID, "kiki_item"), KIKI);
     }
 
 

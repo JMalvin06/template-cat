@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.EntityView;
 import oreo.fabricmod.ai.SleepWhenOwnerGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
@@ -246,5 +247,10 @@ public abstract class EnhancedCat extends CatEntity {
 
     public BehaviorState getCurrentBehavior(){
         return currentState;
+    }
+
+    @Override
+    public EntityView method_48926() {
+        return this.getWorld();
     }
 }

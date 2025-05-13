@@ -11,9 +11,9 @@ public class BackHomeGoal extends MoveToTargetPosGoal {
 
     private final EnhancedCat cat;
 
-    public BackHomeGoal(EnhancedCat oreo, double speed){
-        super(oreo, speed, 0); // Range never used
-        this.cat = oreo;
+    public BackHomeGoal(EnhancedCat cat, double speed){
+        super(cat, speed, 0); // Range never used
+        this.cat = cat;
     }
 
     @Override

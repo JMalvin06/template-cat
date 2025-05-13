@@ -39,8 +39,6 @@ public class OreoEntity extends EnhancedCat {
         super.addStatusEffect(StatusEffects.STRENGTH, 1000);
     }
 
-
-
     @Override
     protected void initGoals() {
         super.initGoals();
@@ -70,11 +68,4 @@ public class OreoEntity extends EnhancedCat {
         else
             OreoMod.LOGGER.info("No held item");
     }*/
-
-
-
-    @Override
-    public EntityView method_48926() {
-        return super.getWorld();
-    }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "oreomod:item/oreo_item"
+    "layer0": "oreomod:item/kiki_item"
   }
 }

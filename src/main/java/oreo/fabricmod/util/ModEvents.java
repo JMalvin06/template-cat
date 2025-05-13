@@ -34,8 +34,7 @@ public class ModEvents {
         ServerEntityEvents.ENTITY_UNLOAD.register((entity, world) -> {
             if(entity instanceof EnhancedCat enhancedCat){
                 StateSaverAndLoader serverState = StateSaverAndLoader.getServerState(world.getServer());
-                OreoMod.LOGGER.info("Oreo is now not world");
-                serverState.catList.remove("Oreo");
+                serverState.catList.remove(enhancedCat.getName().getString());
 
                 if(enhancedCat.isDead()){
                     try {
@@ -54,16 +53,17 @@ public class ModEvents {
                         if (enhancedCat.getWorld().spawnEntity(newCat)) {
                             OreoMod.LOGGER.info("Welcome back " + newCat.getName().getString() + "!");
                         }
+                        newCat.setFollowMode();
                     } catch (Exception e) {
                         for (PlayerEntity player : enhancedCat.getWorld().getPlayers()) {
-                            player.sendMessage(Text.literal("Oreo was unfortunately not respawned.."));
+                            player.sendMessage(Text.literal(enhancedCat.getName().getString() + " was unfortunately not respawned.."));
                         }
-                        OreoMod.LOGGER.info(e.toString());
+                        /*OreoMod.LOGGER.info(e.toString());
                         PlayerEntity owner = ((PlayerEntity) enhancedCat.getOwner());
                         if (owner != null) {
                             owner.giveItemStack(ModItems.OREO.getDefaultStack());
                         } else
-                            OreoMod.LOGGER.info("No Oreo owner to give item stack to");
+                            OreoMod.LOGGER.info("No Oreo owner to give item stack to");*/
                     }
                 }
             }

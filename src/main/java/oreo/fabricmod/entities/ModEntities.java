@@ -17,7 +17,14 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, OreoEntity::new).dimensions(EntityDimensions.fixed(0.6f, 0.7f)).build()
     );
 
+    public static final EntityType<KikiEntity> KIKI_ENTITY = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(OreoMod.MOD_ID, "kiki_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, KikiEntity::new).dimensions(EntityDimensions.fixed(0.6f, 0.7f)).build()
+    );
+
     public static void registerEntities(){
         FabricDefaultAttributeRegistry.register(OREO_ENTITY, OreoEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(KIKI_ENTITY, OreoEntity.setAttributes());
     }
 }
