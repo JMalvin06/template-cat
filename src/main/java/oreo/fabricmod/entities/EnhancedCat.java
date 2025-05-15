@@ -27,6 +27,8 @@ import oreo.fabricmod.blocks.CatBed;
 import oreo.fabricmod.blocks.ModBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class EnhancedCat extends CatEntity {
     // private static final Ingredient TAMING_INGREDIENT = Ingredient.ofItems(Items.CHICKEN);
@@ -35,6 +37,7 @@ public abstract class EnhancedCat extends CatEntity {
     protected BehaviorState currentState;
     private BlockPos homePos;
     private final Class<AnimalEntity>[] attackableEntities;
+    public static final String name = "";
 
 
     private ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>();
@@ -52,8 +55,15 @@ public abstract class EnhancedCat extends CatEntity {
         this.goalSelector.add(4, new TemptGoal(this, 0.6, TAMING_INGREDIENT , false));
     }
 
-    protected void addStatusEffect(StatusEffect type, int duration){
-        statusEffects.add(new StatusEffectInstance(type, duration, 0, false, false, true));
+    protected void addStatusEffect(StatusEffect type, int seconds){
+        int ticks = seconds * 20; // 20 ticks per second is the default tick speed
+        statusEffects.add(new StatusEffectInstance(type, ticks, 0, false, false, true));
+    }
+
+    protected void addEffectsFromMap(HashMap<StatusEffect, Integer> statusMap){
+        for (HashMap.Entry<StatusEffect, Integer> entry : statusMap.entrySet()){
+            this.addStatusEffect(entry.getKey(), entry.getValue());
+        }
     }
 
 
@@ -120,8 +130,9 @@ public abstract class EnhancedCat extends CatEntity {
                 for (PlayerEntity player : this.getWorld().getPlayers()) {
                     if (player.getBlockPos().isWithinDistance(this.getBlockPos().toCenterPos(), 10)) {
                         // Give player all status effects attributed to this entity
-                        for (StatusEffectInstance statusEffect : statusEffects)
+                        for (StatusEffectInstance statusEffect : statusEffects) {
                             player.addStatusEffect(statusEffect);
+                        }
                     }
 
                 }

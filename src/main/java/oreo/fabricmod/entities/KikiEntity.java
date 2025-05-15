@@ -1,6 +1,7 @@
 package oreo.fabricmod.entities;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CatEntity;
@@ -11,14 +12,22 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.world.World;
 import oreo.fabricmod.ai.BackHomeGoal;
 
+import java.util.HashMap;
+
 public class KikiEntity extends EnhancedCat{
     private static final Ingredient FOOD = Ingredient.ofItems(Items.SALMON);
     private static final Class<AnimalEntity>[] entities = new Class[]{RabbitEntity.class};
+    private static final HashMap<StatusEffect, Integer> effects = new HashMap<>(){
+        {
+            put(StatusEffects.SPEED, 15);
+        }
+    };
 
     public KikiEntity(EntityType<? extends CatEntity> entityType, World world) {
         super(entityType, world, FOOD, entities);
-        super.addStatusEffect(StatusEffects.SPEED, 1000);
+        addEffectsFromMap(effects);
     }
+
 
     @Override
     protected void initGoals() {

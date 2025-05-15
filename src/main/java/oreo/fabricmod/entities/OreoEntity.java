@@ -1,6 +1,8 @@
 package oreo.fabricmod.entities;
 
 
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.stat.Stat;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import oreo.fabricmod.OreoMod;
@@ -28,15 +30,22 @@ import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import oreo.fabricmod.items.ModItems;
 
+import java.time.Duration;
 import java.util.*;
 
 
 public class OreoEntity extends EnhancedCat {
     private static final Ingredient OREO_TAMING_INGREDIENT = Ingredient.ofItems(Items.CHICKEN);
+    private static final HashMap<StatusEffect, Integer> effects = new HashMap<>(){
+        {
+            put(StatusEffects.STRENGTH, 15);
+        }
+    };
+
 
     public OreoEntity(EntityType<? extends EnhancedCat> entityType, World world) {
         super(entityType, world, OREO_TAMING_INGREDIENT, new Class[]{ChickenEntity.class, RabbitEntity.class});
-        super.addStatusEffect(StatusEffects.STRENGTH, 1000);
+        super.addEffectsFromMap(effects);
     }
 
     @Override
