@@ -41,11 +41,11 @@ public class OreoEntity extends EnhancedCat {
             put(StatusEffects.STRENGTH, 15);
         }
     };
+    private static final Class<AnimalEntity>[] entities = new Class[]{ChickenEntity.class, RabbitEntity.class};
 
 
     public OreoEntity(EntityType<? extends EnhancedCat> entityType, World world) {
-        super(entityType, world, OREO_TAMING_INGREDIENT, new Class[]{ChickenEntity.class, RabbitEntity.class});
-        super.addEffectsFromMap(effects);
+        super(entityType, world, OREO_TAMING_INGREDIENT, entities, effects);
     }
 
     @Override

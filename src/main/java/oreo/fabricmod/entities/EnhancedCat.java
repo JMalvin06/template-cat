@@ -40,9 +40,12 @@ public abstract class EnhancedCat extends CatEntity {
     public static final String name = "";
 
 
-    private ArrayList<StatusEffectInstance> statusEffects = new ArrayList<>();
+    private HashMap<StatusEffect, Integer> statusEffects;
 
-
+    public EnhancedCat(EntityType<? extends CatEntity> entityType, World world, Ingredient tamingIngredient, Class<AnimalEntity>[] entities, HashMap<StatusEffect, Integer> statusEffects) {
+        this(entityType,world,tamingIngredient,entities);
+        this.statusEffects = statusEffects;
+    }
 
     public EnhancedCat(EntityType<? extends CatEntity> entityType, World world, Ingredient tamingIngredient, Class<AnimalEntity>[] entities) {
         super(entityType, world);
@@ -55,16 +58,16 @@ public abstract class EnhancedCat extends CatEntity {
         this.goalSelector.add(4, new TemptGoal(this, 0.6, TAMING_INGREDIENT , false));
     }
 
-    protected void addStatusEffect(StatusEffect type, int seconds){
+    /*protected void addStatusEffect(StatusEffect type, int seconds){
         int ticks = seconds * 20; // 20 ticks per second is the default tick speed
-        statusEffects.add(new StatusEffectInstance(type, ticks, 0, false, false, true));
-    }
+        statusEffects.add(new StatusEffectInstance(type, ticks, 0, true, false, true));
+    }*/
 
-    protected void addEffectsFromMap(HashMap<StatusEffect, Integer> statusMap){
+    /*protected void addEffectsFromMap(HashMap<StatusEffect, Integer> statusMap){
         for (HashMap.Entry<StatusEffect, Integer> entry : statusMap.entrySet()){
             this.addStatusEffect(entry.getKey(), entry.getValue());
         }
-    }
+    }*/
 
 
 
@@ -130,8 +133,9 @@ public abstract class EnhancedCat extends CatEntity {
                 for (PlayerEntity player : this.getWorld().getPlayers()) {
                     if (player.getBlockPos().isWithinDistance(this.getBlockPos().toCenterPos(), 10)) {
                         // Give player all status effects attributed to this entity
-                        for (StatusEffectInstance statusEffect : statusEffects) {
-                            player.addStatusEffect(statusEffect);
+                        for (Map.Entry<StatusEffect, Integer> statusEffect : statusEffects.entrySet()) {
+                            StatusEffectInstance updatedEffect = new StatusEffectInstance(statusEffect.getKey(), statusEffect.getValue()*20, 0, true, false, true);
+                            player.addStatusEffect(updatedEffect);
                         }
                     }
 

@@ -24,8 +24,7 @@ public class KikiEntity extends EnhancedCat{
     };
 
     public KikiEntity(EntityType<? extends CatEntity> entityType, World world) {
-        super(entityType, world, FOOD, entities);
-        addEffectsFromMap(effects);
+        super(entityType, world, FOOD, entities, effects);
     }
 
 

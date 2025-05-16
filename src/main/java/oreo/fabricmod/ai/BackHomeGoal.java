@@ -1,7 +1,6 @@
 package oreo.fabricmod.ai;
 
 import oreo.fabricmod.entities.EnhancedCat;
-import oreo.fabricmod.entities.OreoEntity;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +21,7 @@ public class BackHomeGoal extends MoveToTargetPosGoal {
                 !this.mob.isLeashed() &&
                 !((CatEntity) this.mob).isSitting() &&
                 !this.mob.getBlockPos().isWithinDistance(this.cat.getHomePos().toCenterPos(), 10) &&
-                ((OreoEntity) this.mob).getCurrentBehavior() == EnhancedCat.BehaviorState.ROAM;
+                ((EnhancedCat) this.mob).getCurrentBehavior() == EnhancedCat.BehaviorState.ROAM;
     }
 
     @Override
