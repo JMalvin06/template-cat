@@ -14,6 +14,8 @@ public class ModEntities {
 
     public static final EntityType<KikiEntity> KIKI_ENTITY = registerEnhancedCat("kiki_entity", KikiEntity::new);
 
+    public static EntityType<TemplateCat> TEMPLATE = null;
+
     public static <T extends EnhancedCat> EntityType<T> registerEnhancedCat(String path, EntityType.EntityFactory<T> factory){
         return Registry.register(
                 Registries.ENTITY_TYPE,
@@ -23,6 +25,8 @@ public class ModEntities {
     }
 
     public static void registerEntities(){
+        TEMPLATE = registerEnhancedCat(OreoMod.customName.toLowerCase()+"_entity", TemplateCat::new);
+        FabricDefaultAttributeRegistry.register(TEMPLATE, OreoEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(OREO_ENTITY, OreoEntity.setAttributes());
         FabricDefaultAttributeRegistry.register(KIKI_ENTITY, OreoEntity.setAttributes());
     }

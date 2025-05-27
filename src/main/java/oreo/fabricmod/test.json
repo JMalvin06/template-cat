@@ -1,0 +1,7 @@
+{
+  "name" : "Test",
+  "status_effects" : {
+    "slowness" : 15,
+    "glowing" : 15
+  }
+}

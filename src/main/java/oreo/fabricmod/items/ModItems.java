@@ -13,12 +13,12 @@ import net.minecraft.util.Identifier;
 import oreo.fabricmod.entities.EnhancedCat;
 import oreo.fabricmod.entities.ModEntities;
 
-import static oreo.fabricmod.entities.ModEntities.KIKI_ENTITY;
-import static oreo.fabricmod.entities.ModEntities.OREO_ENTITY;
+import static oreo.fabricmod.entities.ModEntities.*;
 
 public class ModItems {
     public static final Item OREO = createCatItem(OREO_ENTITY);
     public static final Item KIKI = createCatItem(KIKI_ENTITY);
+    public static final Item TEMP = createCatItem(TEMPLATE);
 
     public static CatItem createCatItem(EntityType<? extends EnhancedCat> type){
         Identifier id = Registries.ENTITY_TYPE.getId(type);
@@ -32,9 +32,11 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.SPAWN_EGGS).register(content -> {
             content.add(OREO);
             content.add(KIKI);
+            content.add(TEMP);
         });
         Registry.register(Registries.ITEM, new Identifier(OreoMod.MOD_ID, "oreo_item"), OREO);
         Registry.register(Registries.ITEM, new Identifier(OreoMod.MOD_ID, "kiki_item"), KIKI);
+        Registry.register(Registries.ITEM, new Identifier(OreoMod.MOD_ID, OreoMod.customName.toLowerCase()+"_item"), TEMP);
     }
 
 
