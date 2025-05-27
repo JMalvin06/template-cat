@@ -1,7 +1,3 @@
 {
-  "item.oreomod.oreo_item": "Oreo",
-  "item.oreomod.kiki_item":  "Kiki",
-  "block.oreomod.cat_bed": "Cat Bed",
-  "entity.oreomod.oreo_entity": "Oreo",
-  "entity.oreomod.kiki_entity": "Kiki"
+  "block.oreomod.cat_bed": "Cat Bed"
 }

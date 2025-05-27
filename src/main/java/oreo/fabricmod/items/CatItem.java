@@ -3,7 +3,6 @@ package oreo.fabricmod.items;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -11,8 +10,6 @@ import net.minecraft.world.World;
 import oreo.fabricmod.OreoMod;
 import oreo.fabricmod.StateSaverAndLoader;
 import oreo.fabricmod.entities.EnhancedCat;
-import oreo.fabricmod.entities.ModEntities;
-import oreo.fabricmod.entities.OreoEntity;
 import oreo.fabricmod.util.ModSounds;
 
 import java.util.ArrayList;

@@ -4,10 +4,8 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.CatEntityModel;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import oreo.fabricmod.entities.EnhancedCat;
-import oreo.fabricmod.entities.OreoEntity;
 
 public class CreateHatPosFix<T extends EnhancedCat, M extends CatEntityModel<T>> extends FeatureRenderer<T, M> {
 

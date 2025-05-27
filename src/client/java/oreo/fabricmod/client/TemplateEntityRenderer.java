@@ -11,7 +11,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import oreo.fabricmod.OreoMod;
-import oreo.fabricmod.entities.OreoEntity;
 import oreo.fabricmod.entities.TemplateCat;
 
 import java.util.List;

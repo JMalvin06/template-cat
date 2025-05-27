@@ -1,15 +1,10 @@
 package oreo.fabricmod.util;
 
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
 import oreo.fabricmod.OreoMod;
 import oreo.fabricmod.StateSaverAndLoader;
 import oreo.fabricmod.blocks.CatBed;
 import oreo.fabricmod.blocks.ModBlocks;
 import oreo.fabricmod.entities.EnhancedCat;
-import oreo.fabricmod.entities.ModEntities;
-import oreo.fabricmod.entities.OreoEntity;
-import oreo.fabricmod.items.ModItems;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

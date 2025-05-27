@@ -111,7 +111,5 @@ public class OreoMod implements ModInitializer {
 		LOGGER.info("Registered blocks");
 		ModEvents.registerEvents();
 		LOGGER.info("Registered events");
-		ModSounds.registerSounds();
-		LOGGER.info("Registered sounds");
 	}
 }

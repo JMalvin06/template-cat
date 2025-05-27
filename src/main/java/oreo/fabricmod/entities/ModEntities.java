@@ -10,9 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModEntities {
-    public static final EntityType<OreoEntity> OREO_ENTITY = registerEnhancedCat("oreo_entity", OreoEntity::new);
-
-    public static final EntityType<KikiEntity> KIKI_ENTITY = registerEnhancedCat("kiki_entity", KikiEntity::new);
 
     public static EntityType<TemplateCat> TEMPLATE = null;
 
@@ -26,8 +23,6 @@ public class ModEntities {
 
     public static void registerEntities(){
         TEMPLATE = registerEnhancedCat(OreoMod.customName.toLowerCase()+"_entity", TemplateCat::new);
-        FabricDefaultAttributeRegistry.register(TEMPLATE, OreoEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(OREO_ENTITY, OreoEntity.setAttributes());
-        FabricDefaultAttributeRegistry.register(KIKI_ENTITY, OreoEntity.setAttributes());
+        FabricDefaultAttributeRegistry.register(TEMPLATE, TemplateCat.setAttributes());
     }
 }
