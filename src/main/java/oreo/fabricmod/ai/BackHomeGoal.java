@@ -1,18 +1,18 @@
 package oreo.fabricmod.ai;
 
-import oreo.fabricmod.entities.OreoEntity;
+import oreo.fabricmod.entities.EnhancedCat;
 import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
 
-public class OreoBackHomeGoal extends MoveToTargetPosGoal {
+public class BackHomeGoal extends MoveToTargetPosGoal {
 
-    private final OreoEntity oreo;
+    private final EnhancedCat cat;
 
-    public OreoBackHomeGoal(OreoEntity oreo, double speed){
-        super(oreo, speed, 0); // Range never used
-        this.oreo = oreo;
+    public BackHomeGoal(EnhancedCat cat, double speed){
+        super(cat, speed, 0); // Range never used
+        this.cat = cat;
     }
 
     @Override
@@ -20,19 +20,19 @@ public class OreoBackHomeGoal extends MoveToTargetPosGoal {
         return this.mob.getWorld().isNight() &&
                 !this.mob.isLeashed() &&
                 !((CatEntity) this.mob).isSitting() &&
-                !this.mob.getBlockPos().isWithinDistance(this.oreo.getHomePos().toCenterPos(), 10) &&
-                ((OreoEntity) this.mob).getCurrentMode() == OreoEntity.OreoMode.ROAM;
+                !this.mob.getBlockPos().isWithinDistance(this.cat.getHomePos().toCenterPos(), 10) &&
+                ((EnhancedCat) this.mob).getCurrentBehavior() == EnhancedCat.BehaviorState.ROAM;
     }
 
     @Override
     public void start() {
-        this.targetPos = this.oreo.getHomePos();
+        this.targetPos = this.cat.getHomePos();
         super.start();
     }
 
     @Override
     protected BlockPos getTargetPos() {
-        return this.oreo.getHomePos().up();
+        return this.cat.getHomePos().up();
     }
 
     // This method is not used.

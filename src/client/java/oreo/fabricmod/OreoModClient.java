@@ -21,8 +21,6 @@ public class OreoModClient implements ClientModInitializer {
 		 *
 		 * Entity Renderers can also manipulate the model before it renders based on entity context (EndermanEntityRenderer#render).
 		 */
-
-
 		ModRenderers.registerRenderer();
 	}
 }

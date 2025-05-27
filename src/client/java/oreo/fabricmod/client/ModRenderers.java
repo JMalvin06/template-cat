@@ -6,6 +6,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 public class ModRenderers {
 
     public static void registerRenderer(){
-        EntityRendererRegistry.register(ModEntities.OREO_ENTITY, OreoEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.TEMPLATE, TemplateEntityRenderer::new);
     }
 }

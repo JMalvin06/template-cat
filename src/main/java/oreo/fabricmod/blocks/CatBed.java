@@ -1,5 +1,6 @@
 package oreo.fabricmod.blocks;
 
+import io.netty.util.internal.SuppressJava6Requirement;
 import net.minecraft.block.*;
 import net.minecraft.entity.passive.CatEntity;
 import net.minecraft.item.ItemPlacementContext;
@@ -9,6 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
+
+import java.util.Objects;
 
 
 public class CatBed extends HorizontalFacingBlock {
@@ -27,14 +30,14 @@ public class CatBed extends HorizontalFacingBlock {
 
     private static final VoxelShape SHAPE = Block.createCuboidShape(0,0, 0, 16, 6, 16);
 
-    @Override
+    @Override @SuppressWarnings({"deprecation"})
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext ctx) {
         return SHAPE;
     }
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return Objects.requireNonNull(super.getPlacementState(ctx)).with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     public void setUser(CatEntity user){
