@@ -18,6 +18,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -67,8 +70,11 @@ public class OreoMod implements ModInitializer {
 	public static String customName = "";
 	public static HashMap<StatusEffect, Integer> customEffects = new HashMap<StatusEffect, Integer>();
 
-	public void setupCustomEntity(){
-		File file = new File("../src/main/java/oreo/fabricmod/custom_cat.json");
+	public void setupCustomEntity() throws IOException {
+		InputStream input = getClass().getClassLoader().getResourceAsStream("assets/oreomod/custom_cat.json");
+		if (input == null) throw new FileNotFoundException("Could not find custom_cat.json");
+		String jsonString = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+		/*File file = new File("../src/main/java/oreo/fabricmod/custom_cat.json");
 		StringBuilder data = new StringBuilder();
 		try {
 			Scanner fin = new Scanner(file);
@@ -77,10 +83,10 @@ public class OreoMod implements ModInitializer {
 			}
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
-		}
+		}*/
 
 		try {
-			json = (JSONObject) new JSONParser().parse(data.toString());
+			json = (JSONObject) new JSONParser().parse(jsonString);
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
@@ -102,8 +108,12 @@ public class OreoMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		setupCustomEntity();
-		LOGGER.info("Registered items");
+        try {
+            setupCustomEntity();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        LOGGER.info("Registered items");
 		ModEntities.registerEntities();
         ModItems.registerItems();
 		LOGGER.info("Registered entities");
